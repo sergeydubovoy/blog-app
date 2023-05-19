@@ -105,6 +105,9 @@ body {
   flex-direction: column;
   gap: 10px;
 }
+.post__created {
+  color: #304ffe;
+}
 .post__title {
   font-weight: 600;
   font-size: 18px;

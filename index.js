@@ -41,9 +41,22 @@ const getPost = () => {
 };
 
 const addPost = ({ title, text }) => {
+  const currentDate = new Date();
+
+  const createdDate = currentDate
+    .toLocaleDateString("ru-RU", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+    .replace(/ г\.$/, "");
+  const createdTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  const createdDateTime = `${createdDate} ${createdTime}`;
+
   posts.push({
     title: title,
     text: text,
+    created: createdDateTime,
   });
 };
 
@@ -59,6 +72,7 @@ const renderPosts = () => {
   posts.forEach((post) => {
     postsHTML += `
     <div class="post">
+        <p class="post__created">${post.created}</p>
         <h3 class="post__title">${post.title}</h3>
         <p class="post__text">${post.text}</p>
     </div>
