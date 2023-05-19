@@ -14,6 +14,35 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles/main.css" />
+    <script src="index.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1 class="title title_main">Мой блог</h1>
+      <div class="blog-wrapper">
+        <section class="manage">
+          <h2 class="title">Новый пост</h2>
+          <input
+            id="addTitleInput"
+            class="input manage__input-title"
+            type="text"
+            placeholder="Заголовок"
+          />
+          <input
+            id="addPostUnput"
+            class="input manage__input-post"
+            type="text"
+            placeholder="Что у вас нового?"
+          />
+          <button id="addPostButton" class="button manage__button-add">
+            Опубликовать
+          </button>
+        </section>
+        <section class="feed">
+          <h2 class="title">Лента</h2>
+          <div id="feed-wrapper" class="feed-wrapper"></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
