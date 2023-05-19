@@ -10,11 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles/main.css" />
-    <script src="index.js"></script>
   </head>
   <body>
     <div class="container">
@@ -22,27 +21,44 @@
       <div class="blog-wrapper">
         <section class="manage">
           <h2 class="title">Новый пост</h2>
-          <input
-            id="addTitleInput"
-            class="input manage__input-title"
-            type="text"
-            placeholder="Заголовок"
-          />
-          <input
-            id="addPostUnput"
-            class="input manage__input-post"
-            type="text"
-            placeholder="Что у вас нового?"
-          />
-          <button id="addPostButton" class="button manage__button-add">
+          <div class="input-wrapper">
+            <input
+              id="postTitleInputNode"
+              class="input manage__input-title"
+              type="text"
+              placeholder="Заголовок"
+            />
+            <p id="inputTitleCountNode" class="input-count-wrapper">
+              Осталось <span id="titleCharCount">0</span> символов
+            </p>
+          </div>
+          <div class="input-wrapper">
+            <input
+              id="postTextInputNode"
+              class="input manage__input-description"
+              type="text"
+              placeholder="Что у вас нового?"
+            />
+            <p id="inputTextCountNode" class="input-count-wrapper">
+              Осталось <span id="textCharCount">0</span> символов
+            </p>
+          </div>
+          <button id="publishButtonNode" class="button manage__button-add">
             Опубликовать
           </button>
         </section>
         <section class="feed">
           <h2 class="title">Лента</h2>
-          <div id="feed-wrapper" class="feed-wrapper"></div>
+          <div id="feedList" class="feed__list">
+            Тут пока пусто...
+            <div class="post">
+              <h3 class="post__title"></h3>
+              <p class="post__text"></p>
+            </div>
+          </div>
         </section>
       </div>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
