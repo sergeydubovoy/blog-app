@@ -78,10 +78,22 @@ postTitleInputNode.addEventListener("input", () => {
       TITLE_CHAR_LIMIT
     );
     titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+  } else {
+    titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
 });
 
 postTextInputNode.addEventListener("input", () => {
-  const count = postTextInputNode.value.length;
+  const count = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
   textCharCount.textContent = count;
+
+  if (count < 0) {
+    postTextInputNode.value = postTextInputNode.value.substring(
+      0,
+      TEXT_CHAR_LIMIT
+    );
+    textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+  } else {
+    textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+  }
 });
