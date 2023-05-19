@@ -93,7 +93,7 @@ body {
 .feed {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 300px;
   gap: 30px;
 }
 .feed__list {
@@ -102,19 +102,34 @@ body {
   gap: 30px;
 }
 .post {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+.post::after {
+  position: absolute;
+  content: "";
+  width: 50%;
+  height: 1px;
+  background-color: gray;
+  opacity: 0.5;
+  bottom: -15px;
+}
 .post__created {
+  font-size: 14px;
+  line-height: 18px;
   color: #304ffe;
 }
 .post__title {
+  max-width: 100%;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 20px;
+  line-height: 24px;
+  word-wrap: break-word;
 }
 .post__text {
   font-size: 16px;
   line-height: 20px;
+  word-wrap: break-word;
 }
