@@ -1,6 +1,6 @@
 const NUMBER_OF_CHAR_TITLE_EXCEEDED = "Заголовок больше 100 символов";
 const NUMBER_OF_CHAR_TEXT_EXCEEDED = "Пост больше 200 символов";
-const TITLE_CHAR_LIMIT = 100;
+const TITLE_CHAR_LIMIT = 50;
 const TEXT_CHAR_LIMIT = 200;
 const STATUS_OUT_OF_LIMIT_CLASSNAME = "status_red";
 
@@ -15,6 +15,13 @@ let titleCharCount = document.getElementById("titleCharCount");
 let textCharCount = document.getElementById("textCharCount");
 let titleCharCountWrapper = document.getElementById("titleCharCountWrapper");
 let textCharCountWrapper = document.getElementById("textCharCountWrapper");
+
+const initApp = () => {
+  titleCharCount.textContent = TITLE_CHAR_LIMIT;
+  textCharCount.textContent = TEXT_CHAR_LIMIT;
+};
+
+initApp();
 
 publishButtonNode.addEventListener("click", () => {
   const postFromUser = getPost();
