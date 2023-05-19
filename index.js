@@ -17,14 +17,21 @@ let titleCharCountWrapper = document.getElementById("titleCharCountWrapper");
 let textCharCountWrapper = document.getElementById("textCharCountWrapper");
 
 publishButtonNode.addEventListener("click", () => {
-  const postFromUser = getPostTitle();
+  const postFromUser = getPost();
+
+  const title = postTitleInputNode.value;
+  const text = postTextInputNode.value;
+
+  if (!title || !text) {
+    return;
+  }
 
   addPost(postFromUser);
   renderPosts();
   clearInputs();
 });
 
-const getPostTitle = () => {
+const getPost = () => {
   const title = postTitleInputNode.value;
   const text = postTextInputNode.value;
   return {
