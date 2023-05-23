@@ -48,10 +48,18 @@ body {
   text-transform: uppercase;
   transition: all 0.2s linear;
 }
+.button_disabled {
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+}
 .button:hover {
   background-color: white;
   color: #304ffe;
   border: 1px solid #304ffe;
+}
+.button_disabled:hover {
+  pointer-events: none !important;
 }
 .title {
   font-weight: 800;

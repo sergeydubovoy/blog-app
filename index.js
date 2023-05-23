@@ -16,9 +16,15 @@ let textCharCount = document.getElementById("textCharCount");
 let titleCharCountWrapper = document.getElementById("titleCharCountWrapper");
 let textCharCountWrapper = document.getElementById("textCharCountWrapper");
 
+const disableButton = () => {
+  publishButtonNode.setAttribute("disabled", "");
+  publishButtonNode.classList.add("button_disabled");
+};
+
 const initApp = () => {
   titleCharCount.textContent = TITLE_CHAR_LIMIT;
   textCharCount.textContent = TEXT_CHAR_LIMIT;
+  disableButton();
 };
 
 initApp();
@@ -29,7 +35,8 @@ publishButtonNode.addEventListener("click", () => {
   const title = postTitleInputNode.value;
   const text = postTextInputNode.value;
 
-  if (!title || !text) {
+  if (!title || !text || title.length < 5 || text.length < 5) {
+    alert("Заголовок и текст должны быть длинее 5 символов");
     return;
   }
 
@@ -96,32 +103,112 @@ const clearInputs = () => {
   textCharCount.textContent = TEXT_CHAR_LIMIT;
 };
 
-postTitleInputNode.addEventListener("input", () => {
-  const count = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
-  titleCharCount.textContent = count;
+// Старые формулы
 
-  if (count < 0) {
-    postTitleInputNode.value = postTitleInputNode.value.substring(
-      0,
-      TITLE_CHAR_LIMIT
-    );
+// const handleTitleInput = () => {
+//   const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
+//   titleCharCount.textContent = counterTitle;
+
+//   if (counterTitle < 0) {
+//     publishButtonNode.setAttribute("disabled", "");
+//     publishButtonNode.classList.add("button_disabled");
+//     titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//   } else {
+//     publishButtonNode.removeAttribute("disabled", "");
+//     publishButtonNode.classList.remove("button_disabled");
+//     titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//   }
+// };
+
+// postTitleInputNode.addEventListener("input", handleTitleInput);
+
+// const handleTextInput = () => {
+//   const counterText = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
+//   textCharCount.textContent = counterText;
+
+//   if (counterText < 0) {
+//     publishButtonNode.setAttribute("disabled", "");
+//     publishButtonNode.classList.add("button_disabled");
+//     textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//   } else {
+//     publishButtonNode.removeAttribute("disabled", "");
+//     publishButtonNode.classList.remove("button_disabled");
+//     textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//   }
+// };
+
+// postTextInputNode.addEventListener("input", handleTextInput);
+
+// Новая формула объединенная
+
+// const handleInput = () => {
+//   const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
+//   const counterText = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
+
+//   titleCharCount.textContent = counterTitle;
+//   textCharCount.textContent = counterText;
+
+//   if (counterTitle < 0 || counterText < 0) {
+//     publishButtonNode.setAttribute("disabled", "");
+//     publishButtonNode.classList.add("button_disabled");
+
+//     if (counterTitle < 0) {
+//       titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//     } else {
+//       titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//     }
+
+//     if (counterText < 0) {
+//       textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//     } else {
+//       textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//     }
+//   } else {
+//     publishButtonNode.removeAttribute("disabled", "");
+//     publishButtonNode.classList.remove("button_disabled");
+//     titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//     textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+//   }
+// };
+
+const handleInput = () => {
+  const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
+  const counterText = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
+
+  titleCharCount.textContent = counterTitle;
+  textCharCount.textContent = counterText;
+
+  if (counterTitle < 0 || counterText < 0) {
+    disableButton();
+    toogleTitleClass(counterTitle);
+    toogleTextClass(counterText);
+  } else {
+    enableButton();
+  }
+};
+
+const toogleTitleClass = (counterTitle) => {
+  if (counterTitle < 0) {
     titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
   } else {
     titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
-});
+};
 
-postTextInputNode.addEventListener("input", () => {
-  const count = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
-  textCharCount.textContent = count;
-
-  if (count < 0) {
-    postTextInputNode.value = postTextInputNode.value.substring(
-      0,
-      TEXT_CHAR_LIMIT
-    );
+const toogleTextClass = (counterText) => {
+  if (counterText < 0) {
     textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
   } else {
     textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
-});
+};
+
+const enableButton = () => {
+  publishButtonNode.removeAttribute("disabled", "");
+  publishButtonNode.classList.remove("button_disabled");
+  titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+  textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+};
+
+postTitleInputNode.addEventListener("input", handleInput);
+postTextInputNode.addEventListener("input", handleInput);
