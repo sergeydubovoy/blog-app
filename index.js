@@ -18,7 +18,6 @@ let textCharCountWrapper = document.getElementById("textCharCountWrapper");
 
 const disableButton = () => {
   publishButtonNode.setAttribute("disabled", "");
-  publishButtonNode.classList.add("button_disabled");
 };
 
 const initApp = () => {
@@ -205,7 +204,6 @@ const toogleTextClass = (counterText) => {
 
 const enableButton = () => {
   publishButtonNode.removeAttribute("disabled", "");
-  publishButtonNode.classList.remove("button_disabled");
   titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
   textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
 };
