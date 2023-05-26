@@ -63,7 +63,8 @@ const addPost = ({ title, text }) => {
       year: "numeric",
     })
     .replace(/ г\.$/, "");
-  const createdTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+  const createdTime = `${currentDate.getHours()}:${minutes}`;
   const createdDateTime = `${createdDate} ${createdTime}`;
 
   posts.push({
@@ -101,74 +102,6 @@ const clearInputs = () => {
   titleCharCount.textContent = TITLE_CHAR_LIMIT;
   textCharCount.textContent = TEXT_CHAR_LIMIT;
 };
-
-// Старые формулы
-
-// const handleTitleInput = () => {
-//   const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
-//   titleCharCount.textContent = counterTitle;
-
-//   if (counterTitle < 0) {
-//     publishButtonNode.setAttribute("disabled", "");
-//     publishButtonNode.classList.add("button_disabled");
-//     titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//   } else {
-//     publishButtonNode.removeAttribute("disabled", "");
-//     publishButtonNode.classList.remove("button_disabled");
-//     titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//   }
-// };
-
-// postTitleInputNode.addEventListener("input", handleTitleInput);
-
-// const handleTextInput = () => {
-//   const counterText = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
-//   textCharCount.textContent = counterText;
-
-//   if (counterText < 0) {
-//     publishButtonNode.setAttribute("disabled", "");
-//     publishButtonNode.classList.add("button_disabled");
-//     textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//   } else {
-//     publishButtonNode.removeAttribute("disabled", "");
-//     publishButtonNode.classList.remove("button_disabled");
-//     textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//   }
-// };
-
-// postTextInputNode.addEventListener("input", handleTextInput);
-
-// Новая формула объединенная
-
-// const handleInput = () => {
-//   const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
-//   const counterText = TEXT_CHAR_LIMIT - postTextInputNode.value.length;
-
-//   titleCharCount.textContent = counterTitle;
-//   textCharCount.textContent = counterText;
-
-//   if (counterTitle < 0 || counterText < 0) {
-//     publishButtonNode.setAttribute("disabled", "");
-//     publishButtonNode.classList.add("button_disabled");
-
-//     if (counterTitle < 0) {
-//       titleCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//     } else {
-//       titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//     }
-
-//     if (counterText < 0) {
-//       textCharCountWrapper.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//     } else {
-//       textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//     }
-//   } else {
-//     publishButtonNode.removeAttribute("disabled", "");
-//     publishButtonNode.classList.remove("button_disabled");
-//     titleCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//     textCharCountWrapper.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
-//   }
-// };
 
 const handleInput = () => {
   const counterTitle = TITLE_CHAR_LIMIT - postTitleInputNode.value.length;
